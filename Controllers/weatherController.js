@@ -1,7 +1,7 @@
-import { fetchWeatherData } from '.../services/weatherService';
+import fetchWeatherData from '../Services/weatherService.js';
 
 // Handle the POST request for weather data
-export async function getWeather(req, res) {
+async function getWeather(req, res) {
   try {
     const { cityName } = req.body;
     const weatherData = await fetchWeatherData(cityName);
@@ -9,8 +9,7 @@ export async function getWeather(req, res) {
     res.json(weatherData);
   } catch (error) {
     // Handle error and send appropriate response
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(500).json({ error: 'Failed to fetch weather data from API.' });
   }
 }
-
-
+export { getWeather };
