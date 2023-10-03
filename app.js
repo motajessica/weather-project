@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 require('dotenv').config();
 
   app.use(express.static("public"));
+  app.use(bodyParser.json());
 
   app.use(bodyParser.urlencoded({extended: true}));
 
@@ -35,23 +36,25 @@ require('dotenv').config();
         const humidity = weatherData.main.humidity
         const country = weatherData.sys.country
 
-        res.write(`<div class="container mt-5">`);
-        res.write(`<div class="card weather-output mx-auto" style="width: 18rem;">`);
-        res.write(`<div class="card-body text-center">`);
-        res.write(`<h5 class="card-title">Weather in ${query.toUpperCase()} - ${country}</h5>`);
-        res.write(`<img src=${imgURL} class="card-img-top" alt="Weather icon">`);
-        res.write(`<p class="card-text mt-3"><strong>Temperature:</strong> ${temp}°C</p>`);
-        res.write(`<p class="card-text"><strong>Feels Like:</strong> ${feelsLike} °C</p>`);
-        res.write(`<p class="card-text"><strong>Min Temperature:</strong> ${mintemp} °C</p>`);
-        res.write(`<p class="card-text"><strong>Max Temperature:</strong> ${maxtemp} °C</p>`);
-        res.write(`<p class="card-text"><strong>Wind:</strong> ${wind} m/s</p>`);
-        res.write(`<p class="card-text"><strong>Wind Gusts:</strong> ${windGust} m/s</p>`);
-        res.write(`<p class="card-text"><strong>Humidity:</strong> ${humidity}</p>`);
-        res.write(`</div>`);
-        res.write(`</div>`);
-        res.write(`</div>`);
-        
-        res.send();
+        let weatherHtml = '';
+            weatherHtml += `<div class="container mt-3">`;
+            weatherHtml += `<div class="card weather-output mx-auto" style="width: 30rem;">`;
+            weatherHtml += `<div class="card-body text-center">`;
+            weatherHtml += `<h5 class="card-title">Weather in ${query.toUpperCase()} - ${country}</h5>`;
+            weatherHtml += `<img src=${imgURL} class="card-img-top" alt="Weather icon">`;
+            weatherHtml += `<p class="card-text mt-3"><strong>Temperature:</strong> ${temp}°C</p>`;
+            weatherHtml += `<p class="card-text"><strong>Feels Like:</strong> ${feelsLike} °C</p>`;
+            weatherHtml += `<p class="card-text"><strong>Min Temperature:</strong> ${mintemp} °C</p>`;
+            weatherHtml += `<p class="card-text"><strong>Max Temperature:</strong> ${maxtemp} °C</p>`;
+            weatherHtml += `<p class="card-text"><strong>Wind:</strong> ${wind} m/s</p>`;
+            weatherHtml += `<p class="card-text"><strong>Wind Gusts:</strong> ${windGust} m/s</p>`
+            weatherHtml += `<p class="card-text"><strong>Humidity:</strong> ${humidity}</p>`
+            
+            weatherHtml += `</div>`;
+            weatherHtml += `</div>`;
+            weatherHtml += `</div>`;
+
+        res.send(weatherHtml);
       })
     });
   });

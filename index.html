@@ -28,18 +28,46 @@
     </div>
     <div class="container my-5 d-flex">
       <div class="col-12 col-md-8 mx-auto">
-        <h3 class="mb-4">Choose a City</h3>
-        <form action="/" method="post" class="row g-3">
+        <!-- <form action="/" method="post" class="row g-3"> -->
+          <form id="weatherForm" class="row g-3">
             <div class="col-9">
                 <input id="cityInput" type="text" name="cityName" class="form-control" placeholder="Enter city name">
             </div>
             <div class="col-3 align-self-end">
-                <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+                <button type="submit" class="btn btn-primary btn-block">Go</button>
             </div>
         </form>
+        <!-- / -->
+        <script>
+          const weatherForm = document.getElementById('weatherForm');
+      
+          weatherForm.addEventListener('submit', function(event) {
+              event.preventDefault();  // Prevents the form from submitting normally
+              const cityName = document.getElementById('cityInput').value;
+      
+              // Call the function to fetch weather data
+              fetchWeatherData(cityName);
+          });
+
+          function fetchWeatherData(city) {
+    fetch("/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ cityName: city })
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('weatherResults').innerHTML = data;
+    });
+}
+      </script>
+
     </div>
       </form>
   </div>
+  <div id="weatherResults" class="mt-4"></div>
   <!-- <script src="/script.js"></script> -->
   <script>
     const themeToggle = document.getElementById("theme-toggle");
