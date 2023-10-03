@@ -18,7 +18,7 @@
 <script src="https://kit.fontawesome.com/84517451a1.js" crossorigin="anonymous"></script>
 </head>
   <body>
-    <div class="top-container text-center py-5">
+    <div class="top-container text-center">
       <div class="toggle-container">
         <input type="checkbox" id="theme-toggle" class="d-none">
         <label for="theme-toggle" class="fas fa-moon"></label>
@@ -26,19 +26,33 @@
       <h1 class="title display-3 mb-4">Weather App</h1>
       <p class="lead">Find out the current weather conditions of any city around the world.</p>
     </div>
-    <div class="container my-5">
-      <h3 class="mb-4">Choose a City</h3>
-      <form action="/" method="post" class="row g-3">
-          <div class="col-9">
-              <label for="cityInput" class="form-label">City Name:</label>
-              <input id="cityInput" type="text" name="cityName" class="form-control" placeholder="Enter city name">
-          </div>
-          <div class="col-3 align-self-end">
-              <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
-          </div>
+    <div class="container my-5 d-flex">
+      <div class="col-12 col-md-8 mx-auto">
+        <h3 class="mb-4">Choose a City</h3>
+        <form action="/" method="post" class="row g-3">
+            <div class="col-9">
+                <input id="cityInput" type="text" name="cityName" class="form-control" placeholder="Enter city name">
+            </div>
+            <div class="col-3 align-self-end">
+                <button type="submit" class="btn btn-primary btn-block">Get Weather</button>
+            </div>
+        </form>
+    </div>
       </form>
   </div>
-  
-<script src="/script.js"></script>
+  <!-- <script src="/script.js"></script> -->
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+
+    themeToggle.addEventListener("change", function() {
+        if (this.checked) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            document.querySelector(".toggle-container .fa-moon").classList.replace("fa-moon", "fa-sun");
+        } else {
+            document.documentElement.removeAttribute("data-theme");
+            document.querySelector(".toggle-container .fa-sun").classList.replace("fa-sun", "fa-moon");
+        }
+    });
+</script>
   </body>
 </html>

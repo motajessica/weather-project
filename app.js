@@ -4,6 +4,8 @@ const https = require ("https");
 const bodyParser = require("body-parser");
 require('dotenv').config();
 
+  app.use(express.static("public"));
+
   app.use(bodyParser.urlencoded({extended: true}));
 
   app.get ("/", function(req,res){
@@ -31,8 +33,6 @@ require('dotenv').config();
         const windGust = weatherData.wind.gust
         const feelsLike = weatherData.main.feels_like
         const humidity = weatherData.main.humidity
-        // const sunrise = weatherData.sys.sunrise
-        // const sunset = weatherData.sys.sunset
         const country = weatherData.sys.country
 
         res.write(`<div class="container mt-5">`);

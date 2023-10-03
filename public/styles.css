@@ -17,9 +17,11 @@ form {
 
 .top-container{
   text-align: center;
-  padding: 100px;
+  padding: 150px 0;
   color: white;
+  width: 100%;
   border-bottom: 5px solid var(--secondary-bg-color);
+
 }
 
 .toggle-container {
@@ -41,11 +43,9 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background-color: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%) ;
   background-repeat: no-repeat;
   background-attachment: fixed;
   align-items: center;
-  height: 100vh;
   justify-content: center;
   --bg-color: #f7f8fa;
   --text-color: #333;
@@ -64,8 +64,8 @@ body {
   background-color: var(--btn-bg-color);
 }
 
-Dark Theme
-body[data-theme="dark"] {
+/* Dark Theme */
+[data-theme="dark"] {
   --bg-color: #333;
   --text-color: #f7f8fa;
   --primary-bg-color: #0056b3;
