@@ -1,19 +1,18 @@
-import { get as httpsGet } from 'https';
+import { get as httpsGet } from "https";
 
 export function get(url) {
   return new Promise((resolve, reject) => {
     httpsGet(url, (response) => {
-      let data = '';
+      let data = "";
 
-      response.on('data', (chunk) => {
+      response.on("data", (chunk) => {
         data += chunk;
       });
-
-      response.on('end', () => {
-        console.log("API Response:", data);  // Log the data received from the API
+      response.on("end", () => {
+        // console.log("API Response:", data);
         resolve(JSON.parse(data));
-    });
-      response.on('error', (error) => {
+      });
+      response.on("error", (error) => {
         reject(error);
       });
     });

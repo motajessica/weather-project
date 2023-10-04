@@ -1,41 +1,38 @@
 // weatherUI.js
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-  const weatherForm = document.getElementById('weatherForm');
+document.addEventListener("DOMContentLoaded", function () {
+  const weatherForm = document.getElementById("weatherForm");
 
-  weatherForm.addEventListener('submit', function(event) {
-      event.preventDefault();  // Prevents the form from submitting normally
-      const cityName = document.getElementById('cityInput').value;
-      
-      fetchWeatherData(cityName)
-      .then(data => {
+  weatherForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents the form from submitting normally
+    const cityName = document.getElementById("cityInput").value;
+
+    fetchWeatherData(cityName)
+      .then((data) => {
+        if (data && data.main) {
           // Update the DOM with the weather data
-          if (data && data.main) {
-            // Update the DOM with the weather data
-            updateUIWithWeatherData(data);
+          updateUIWithWeatherData(data);
         } else {
-            console.error("Unexpected response format:", data);
+          console.error("Unexpected response format:", data);
         }
       })
-      .catch(error => {
-          console.error("Failed to fetch weather data:", error);
+      .catch((error) => {
+        console.error("Failed to fetch weather data:", error);
       });
   });
 
   function fetchWeatherData(city) {
-      return fetch("/", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ cityName: city })
-      })
-      .then(response => response.json());
+    return fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cityName: city }),
+    }).then((response) => response.json());
   }
 
   function updateUIWithWeatherData(data) {
-    const weatherResults = document.getElementById('weatherResults');
+    const weatherResults = document.getElementById("weatherResults");
 
     // Extracting required data
     const temp = data.main.temp;
@@ -49,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const feelsLike = data.main.feels_like;
     const humidity = data.main.humidity;
     const country = data.sys.country;
-
+    
     // Constructing HTML
     let weatherHtml = `
         <div class="container">
@@ -62,15 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="card-text"><strong>Min Temperature:</strong> ${mintemp} °C</p>
                     <p class="card-text"><strong>Max Temperature:</strong> ${maxtemp} °C</p>
                     <p class="card-text"><strong>Wind:</strong> ${wind} m/s</p>
-                    <p class="card-text"><strong>Wind Gusts:</strong> ${windGust ? windGust : "N/A"} m/s</p>
+                    <p class="card-text"><strong>Wind Gusts:</strong> ${
+                      windGust ? windGust : "N/A"
+                    } m/s</p>
                     <p class="card-text"><strong>Humidity:</strong> ${humidity}%</p>
                     <p class="card-text">${description}</p>
                 </div>
             </div>
         </div>
     `;
-
-    // Updating the DOM
     weatherResults.innerHTML = weatherHtml;
-}
+  }
 });

@@ -1,5 +1,4 @@
 import fetchWeatherData from '../Services/weatherService.js';
-
 // Handle the POST request for weather data
 async function getWeather(req, res) {
   try {
