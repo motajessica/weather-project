@@ -20,7 +20,7 @@
 </head>
 <body>
   <div class="top-container text-center">
-    <div class="toggle-container" onclick="toggleTheme()">
+    <div class="toggle-container" >
       <input type="checkbox" id="theme-toggle" class="d-none">
       <label for="theme-toggle" class="fas fa-moon"></label>
     </div>
@@ -42,7 +42,7 @@
     </form>
   </div>
   <div id="weatherResults" class="container my-5 d-flex"></div>
-  <script>
+  <!-- <script>
     const themeToggle = document.getElementById("theme-toggle");
     themeToggle.addEventListener("change", function () {
       if (this.checked) {
@@ -53,6 +53,7 @@
         document.querySelector(".toggle-container .fa-sun").classList.replace("fa-sun", "fa-moon");
       }
     });
-  </script>
+  </script> -->
+  <script type="module" src="themeToggle.js"></script>
 </body>
 </html>
